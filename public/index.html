@@ -6,6 +6,27 @@
 </head>
 <body>
 
+<script type="text/x-handlebars">
+  <div class="container">
+    {{outlet}}
+  </div>
+</script>
+
+<script type="text/x-handlebars">
+  <ul>
+  {{#each controller}}
+    <li class="span3">
+      <div class="thumbnail">
+        <img {{bindAttr src="picture"}} />
+        <div class="caption">
+          <h3>{{name}}</h3>
+        </div>
+      </div>
+    </li>
+  {{/each}}
+  </ul>
+</script>
+
 <script src="js/lib/jquery.js"></script>
 <script src="js/lib/handlebars.js"></script>
 <script src="js/lib/ember.js"></script>
