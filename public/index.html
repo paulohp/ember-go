@@ -6,26 +6,31 @@
 </head>
 <body>
 
-<script type="text/x-handlebars">
-  <div class="container">
-    {{outlet}}
-  </div>
-</script>
+  <script type="text/x-handlebars">
+    <div class="container">
+      {{outlet}}
+    </div>
+  </script>
 
-<script type="text/x-handlebars">
-  <ul>
+  <script type="text/x-handlebars" data-template-name="index">
+
+  <ul class="thumbnails">
+  
   {{#each controller}}
+
     <li class="span3">
       <div class="thumbnail">
-        <img {{bindAttr src="picture"}} />
+        <img {{bindAttr src="picture"}}/>
         <div class="caption">
           <h3>{{name}}</h3>
         </div>
       </div>
     </li>
+
   {{/each}}
   </ul>
-</script>
+
+  </script>
 
 <script src="js/lib/jquery.js"></script>
 <script src="js/lib/handlebars.js"></script>

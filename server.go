@@ -6,7 +6,7 @@ import "github.com/gorilla/mux"
 
 func JobsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(`{"kittens": [
+	w.Write([]byte(`{"jobs": [
     {"id": 1, "name": "Bobby", "picture": "http://placekitten.com/200/200"},
     {"id": 2, "name": "Wally", "picture": "http://placekitten.com/200/200"}
   ]}`))
@@ -17,6 +17,7 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/api/jobs", JobsHandler).Methods("GET")
+	http.Handle("/api/", r)
 
 	http.Handle("/", http.FileServer(http.Dir("./public/")))
 

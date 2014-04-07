@@ -14,7 +14,7 @@
   });
 
   App.IndexRoute = Ember.Route.extend({
-    model: function(){
+    model: function() {
       return App.Job.find();
     }
   });
