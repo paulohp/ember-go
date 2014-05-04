@@ -1,0 +1,116 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'speakable' ]
+2 info using npm@1.4.3
+3 info using node@v0.10.26
+4 verbose cache add [ 'speakable', null ]
+5 verbose cache add name=undefined spec="speakable" args=["speakable",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'speakable',
+6 verbose parsed url   path: 'speakable',
+6 verbose parsed url   href: 'speakable' }
+7 silly lockFile c22d70a3-speakable speakable
+8 verbose lock speakable /Users/tagon8/.npm/c22d70a3-speakable.lock
+9 silly lockFile c22d70a3-speakable speakable
+10 silly lockFile c22d70a3-speakable speakable
+11 verbose addNamed [ 'speakable', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 63e8918d-speakable speakable@
+14 verbose lock speakable@ /Users/tagon8/.npm/63e8918d-speakable.lock
+15 silly addNameRange { name: 'speakable', range: '*', hasData: false }
+16 verbose url raw speakable
+17 verbose url resolving [ 'https://registry.npmjs.org/', './speakable' ]
+18 verbose url resolved https://registry.npmjs.org/speakable
+19 info trying registry request attempt 1 at 12:57:54
+20 verbose etag "E0ACK1S9I85T8DC11PU6NHWUL"
+21 http GET https://registry.npmjs.org/speakable
+22 http 304 https://registry.npmjs.org/speakable
+23 silly registry.get cb [ 304,
+23 silly registry.get   { date: 'Sun, 04 May 2014 15:57:52 GMT',
+23 silly registry.get     server: 'Apache',
+23 silly registry.get     via: '1.1 varnish',
+23 silly registry.get     'last-modified': 'Sun, 04 May 2014 15:57:52 GMT',
+23 silly registry.get     'cache-control': 'max-age=1',
+23 silly registry.get     etag: '"E0ACK1S9I85T8DC11PU6NHWUL"',
+23 silly registry.get     'x-served-by': 'cache-v44-ASH',
+23 silly registry.get     'x-cache': 'MISS',
+23 silly registry.get     'x-cache-hits': '0',
+23 silly registry.get     'x-timer': 'S1399219072.168833494,VS0,VE85',
+23 silly registry.get     vary: 'Accept',
+23 silly registry.get     'content-length': '0',
+23 silly registry.get     'keep-alive': 'timeout=10, max=50',
+23 silly registry.get     connection: 'Keep-Alive' } ]
+24 verbose etag speakable from cache
+25 silly addNameRange number 2 { name: 'speakable', range: '*', hasData: true }
+26 silly addNameRange versions [ 'speakable', [ '0.2.0', '0.3.0' ] ]
+27 verbose addNamed [ 'speakable', '0.3.0' ]
+28 verbose addNamed [ '0.3.0', '0.3.0' ]
+29 silly lockFile d27441df-speakable-0-3-0 speakable@0.3.0
+30 verbose lock speakable@0.3.0 /Users/tagon8/.npm/d27441df-speakable-0-3-0.lock
+31 silly lockFile d27441df-speakable-0-3-0 speakable@0.3.0
+32 silly lockFile d27441df-speakable-0-3-0 speakable@0.3.0
+33 silly lockFile 63e8918d-speakable speakable@
+34 silly lockFile 63e8918d-speakable speakable@
+35 silly resolved [ { name: 'speakable',
+35 silly resolved     description: 'A continuous speech recognition module for node.js.',
+35 silly resolved     author: { name: 'Sascha Reuter', email: 'sascha@tape.io' },
+35 silly resolved     contributors: [ [Object] ],
+35 silly resolved     version: '0.3.0',
+35 silly resolved     readme: '# node-speakable\n\nDemo video on what you can achieve using node-speakable: https://my.doctape.com/s/NLHn1z\n\n## Description\n\n**node-speakable** is a continuous speech recognition module for node.js.\n\nBasically, **node-speakable** is continuous waiting for you to say something and waits until you finally stopped talking. It then emits an ```speechResult``` event with an ```Array()``` including of your ```recognizedWords```. You can then ```.indexOf()``` the array to trigger some awesome action to happen, like turning on your ```Philips Hue``` lights.\n\nIf you ever talked to your XBOX360 (kinect) you\'re already familiar on how a continuous speech recognition system works for you.\n\n## How\n\nIt\'s pure JavaScript magic... Ok, not yet! Currently node-speakable needs you to __put a binary of ```sox```__ into the modules (into lib) folder to do the recording. The actual voice recognition is then achieved trough a POST to the the Google Speech API.\n\n## Example usage (node example.js)\n\n```javascript\nvar Speakable = require(\'./\');\n\nvar speakable = new Speakable();\n```\nBy default, the language is American English ( \'en-US\' ), but you can specify another language in the options.\nExample usage:\n```javascript\nvar speakable = new Speakable({lang: \'it-IT\'});\n```\n\n```javascript\nspeakable.on(\'speechStart\', function() {\n  console.log(\'onSpeechStart\');\n});\n\nspeakable.on(\'speechStop\', function() {\n  console.log(\'onSpeechStop\');\n});\n\nspeakable.on(\'speechReady\', function() {\n  console.log(\'onSpeechReady\');\n});\n\nspeakable.on(\'error\', function(err) {\n  console.log(\'onError:\');\n  console.log(err);\n  speakable.recordVoice();\n});\n\nspeakable.on(\'speechResult\', function(recognizedWords) {\n  console.log(\'onSpeechResult:\')\n  console.log(recognizedWords);\n  speakable.recordVoice();\n});\n\nspeakable.recordVoice();\n```\n\n## License\n\n**node-speakable** is licensed under the MIT license.\n\n## Todo / Ideas\n\n* Allow overwrite of speakable’s defaults (sox path & parameters, etc.)\n* Limit maximum listening time\n',
+35 silly resolved     readmeFilename: 'README.md',
+35 silly resolved     _id: 'speakable@0.3.0',
+35 silly resolved     _from: 'speakable@' } ]
+36 info install speakable@0.3.0 into /usr/local/lib
+37 info installOne speakable@0.3.0
+38 info /usr/local/lib/node_modules/speakable unbuild
+39 verbose tar unpack /Users/tagon8/.npm/speakable/0.3.0/package.tgz
+40 silly lockFile 539778a5-local-lib-node-modules-speakable tar:///usr/local/lib/node_modules/speakable
+41 verbose lock tar:///usr/local/lib/node_modules/speakable /Users/tagon8/.npm/539778a5-local-lib-node-modules-speakable.lock
+42 silly lockFile dbcc367c--npm-speakable-0-3-0-package-tgz tar:///Users/tagon8/.npm/speakable/0.3.0/package.tgz
+43 verbose lock tar:///Users/tagon8/.npm/speakable/0.3.0/package.tgz /Users/tagon8/.npm/dbcc367c--npm-speakable-0-3-0-package-tgz.lock
+44 silly gunzTarPerm modes [ '755', '644' ]
+45 silly gunzTarPerm extractEntry package.json
+46 silly gunzTarPerm extractEntry README.md
+47 silly gunzTarPerm extractEntry example.js
+48 silly gunzTarPerm extractEntry index.js
+49 silly gunzTarPerm extractEntry lib/node-speakable.js
+50 silly lockFile 539778a5-local-lib-node-modules-speakable tar:///usr/local/lib/node_modules/speakable
+51 silly lockFile 539778a5-local-lib-node-modules-speakable tar:///usr/local/lib/node_modules/speakable
+52 silly lockFile dbcc367c--npm-speakable-0-3-0-package-tgz tar:///Users/tagon8/.npm/speakable/0.3.0/package.tgz
+53 silly lockFile dbcc367c--npm-speakable-0-3-0-package-tgz tar:///Users/tagon8/.npm/speakable/0.3.0/package.tgz
+54 info preinstall speakable@0.3.0
+55 verbose readDependencies using package.json deps
+56 verbose readDependencies using package.json deps
+57 silly resolved []
+58 verbose about to build /usr/local/lib/node_modules/speakable
+59 info build /usr/local/lib/node_modules/speakable
+60 verbose linkStuff [ true,
+60 verbose linkStuff   '/usr/local/lib/node_modules',
+60 verbose linkStuff   true,
+60 verbose linkStuff   '/usr/local/lib/node_modules' ]
+61 info linkStuff speakable@0.3.0
+62 verbose linkBins speakable@0.3.0
+63 verbose linkMans speakable@0.3.0
+64 verbose rebuildBundles speakable@0.3.0
+65 info install speakable@0.3.0
+66 info postinstall speakable@0.3.0
+67 error peerinvalid The package jshint does not satisfy its siblings' peerDependencies requirements!
+67 error peerinvalid Peer dotfiles@0.6.1 wants jshint@~2.4.0
+68 error System Darwin 13.1.0
+69 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "speakable"
+70 error cwd /Users/tagon8/Workspaces/Hue42/estudos/Go/ember-go
+71 error node -v v0.10.26
+72 error npm -v 1.4.3
+73 error code EPEERINVALID
+74 verbose exit [ 1, true ]
