@@ -4,7 +4,7 @@ import "net/http"
 import "log"
 import "github.com/gorilla/mux"
 
-func JobsHandler(w http.ResponseWriter, r *http.Request) {
+func KittysHandle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write([]byte(`{"kittys": [
     {"id": 1, "name": "Bobby", "picture": "http://placekitten.com/200/200"},
@@ -16,7 +16,7 @@ func main() {
 	log.Println("Starting server")
 
 	r := mux.NewRouter()
-	r.HandleFunc("/api/kittys", JobsHandler).Methods("GET")
+	r.HandleFunc("/api/kittys", KittysHandle).Methods("GET")
 	http.Handle("/api/", r)
 
 	http.Handle("/", http.FileServer(http.Dir("./public/")))
