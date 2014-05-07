@@ -2,6 +2,9 @@ package main
 
 import "net/http"
 import "log"
+import "fmt"
+import "io/ioutil"
+import "os"
 import "github.com/gorilla/mux"
 
 func JobsHandler(w http.ResponseWriter, r *http.Request) {
@@ -13,9 +16,19 @@ func JobsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func PicsHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	resp := http.Get("https://api.instagram.com/v1/tags/snow/media/recent?client_id=48b8d07d69a64138bde5a4278e146f91")
-	log.Println(resp)
+	response, err := http.Get("https://api.instagram.com/v1/tags/snow/media/recent?client_id=48b8d07d69a64138bde5a4278e146f91")
+	if err != nil {
+		fmt.Printf("%s", err)
+		os.Exit(1)
+	} else {
+		defer response.Body.Close()
+		contents, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			fmt.Printf("%s", err)
+			os.Exit(1)
+		}
+		fmt.Printf("%s\n", string(contents))
+	}
 }
 
 func main() {
