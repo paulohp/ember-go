@@ -13,9 +13,14 @@
     picture: DS.attr('string')
   });
 
+  App.Pic = DS.Model.extend({
+    name: DS.attr('string'),
+    image: DS.attr('string')
+  });
+
   App.IndexRoute = Ember.Route.extend({
     model: function() {
-      return App.Job.find();
+      return App.Pic.find();
     }
   });
 })();
